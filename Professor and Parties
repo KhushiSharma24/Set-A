@@ -1,0 +1,42 @@
+/*  A professor attended a party and classified it into two categories based on the colors of the robes. If all persons at the party are wearing different colored robes, 
+represented by positive integers in the array arr[] of size n, then it is a girl's only party. If there is at least one duplicate color, it is a boy's party.
+Determine the type of party by returning “BOYS” if it’s a boy’s party, otherwise return “GIRLS”.
+
+Examples:
+Input
+n = 5, arr[] = {1, 2, 3, 4, 7}
+Output
+GIRLS
+Explanation:
+All the colors are unique so it's a GIRLS party.
+Input
+n = 6, arr[] = {1, 3, 2, 4, 5, 1}
+Output
+BOYS
+Explanation:
+There are two colors 1. So it's a BOYS party.     */
+
+
+class Solution {
+
+    public static String PartyType( long a[], int n)
+    {
+        // Your code goes here
+        HashMap<Long,Integer> hm=new HashMap<>();
+        for(int i=0;i<n;i++){
+            if(hm.containsKey(a[i])){
+                hm.put(a[i],hm.getOrDefault(a[i],0)+1);
+            }
+            else{
+                hm.put(a[i],1);
+            }
+        }
+        for(Map.Entry<Long,Integer> entry: hm.entrySet()){
+            if(entry.getValue()>=2){
+                return "BOYS";
+            }
+        }
+        
+        return "GIRLS";
+    }
+}
