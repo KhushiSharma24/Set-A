@@ -1,0 +1,36 @@
+/*  Given an array arr[] consisting of N integers, the task is to find the length of the Smallest subarray with a sum equal to K.
+
+Examples:
+Input: arr[] = {2, 4, 6, 10, 2, 1}, K = 12 
+Output: 2 
+Explanation: All possible subarrays with sum 12 are {2, 4, 6} and {10, 2}.
+Input: arr[] = {-8, -8, -3, 8}, K = 5 
+Output: 2                                                */
+
+
+import java.util.*;
+public class subarraySum {
+    public static void main(String [] args){
+        int[] arr = {-8, -8, -3, 8};
+        int k = 5;
+        int sum=0;
+        int co=0;
+        int len=0;
+        int min=Integer.MAX_VALUE;
+        HashMap<Integer,Integer> hm=new HashMap<>();
+        hm.put(0,1);
+        for(int i=0;i<arr.length;i++){
+            sum+=arr[i];
+            if(sum==k){
+                int currlen=i+1;
+                min=Math.min(min,currlen);
+            }
+            if(hm.containsKey(sum-k)){
+                co+=hm.get(sum-k);
+                min=Math.min(min,i-co);
+            }
+            hm.put(sum,hm.getOrDefault(sum,0)+1);
+        }
+        System.out.println(min);
+    }
+}
